@@ -5,6 +5,7 @@ var GameLayer = cc.LayerColor.extend({
 		this.addChild(this.maze);
 		this.pacman=new Pacman(10*4+20,60*4+20);
 		this.maze.addChild(this.pacman);
+		this.pacman.scheduleUpdate();
 	}
 });
 var StartScene = cc.Scene.extend({
