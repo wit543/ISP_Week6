@@ -6,13 +6,16 @@ var Pacman = cc.Sprite.extend({
 		this.x = x;
 		this.y = y;
 		this.updatePosition();
-
-		this.direction = Pacman.DIR.UP;
+		this.nextDirection = Pacman.DIR.STILL;
+		this.direction = Pacman.DIR.STILL;
 	},
 	updatePosition:function(){
 		this.setPosition(cc.p(this.x,this.y));
 	},
 	update:function(dt){
+			if(this.isAtCenter()){
+				this.direction=this.nextDirection;
+			}
 		switch(this.direction){
 			case Pacman.DIR.UP:
 			this.y+=Pacman.MOVE_STEP;
@@ -28,6 +31,13 @@ var Pacman = cc.Sprite.extend({
 			break;
 		}
 		this.updatePosition();
+	},
+	isAtCenter:function(){
+		return (((this.x-20)%40==0)&&((this.y-20)%40==0));
+	},
+	setNextDirection:function(dir){
+		console.log(this.x+" "+this.y);
+		this.nextDirection=dir;
 	}
 });
 
